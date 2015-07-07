@@ -41,6 +41,7 @@
     <div id="sidebar">
 
         <tal:block tal:define="person view/person">
+            
         <div id="portrait">
             <tal:block tal:condition="person/image|nothing">
                 <img tal:attributes="src person/image" height="250px"/>
@@ -50,23 +51,24 @@
             </tal:block>
         </div>
 
-        <dl>
+        <dl class="bordered-list">
             <dt>Born</dt>
             <dd tal:condition="not: person/birth_date|nothing">Not
             available</dd>
             <dd><span tal:content="person/birth_date | nothing"></span></dd>
+            <dt>Birth Place</dt>
             <dd><span
                 tal:content="context/birth_location|nothing"></span></dd>
-            <dd>Age: <span tal:content="person/age |
-                nothing"></span></dd>
+            <dt>Age</dt>
+            <dd><span tal:content="person/age|nothing"></span></dd>
         </dl>
 
 
 
                
-          <h2>Contact Details</h2>
+          <h3 class="rep-infotitle">Contact Details</h3>
 
-            <dl tal:repeat="detail person/contact_details|nothing">
+            <dl class="bordered-list" tal:repeat="detail person/contact_details|nothing">
 
                <tal:block tal:condition="python: detail['type']=='email'">
                 <dt tal:content="detail/label"></dt>
@@ -108,13 +110,15 @@
 
      
 
-            <h2>Websites</h2>
-            <ul tal:repeat="detail person/links | nothing">
-                <li><a tal:attributes="href detail/url">
-                     <span tal:content="detail/note"></span>
-                    </a>
-                </li>
-            </ul>
+            
+            <dl class="bordered-list">
+                  <dt>Websites</dt>
+                  <dd tal:repeat="detail person/links | nothing">
+                        <a tal:attributes="href detail/url">
+                        <span tal:content="detail/note"></span>
+                        </a>
+                  </dd>
+            </dl>
 
      </tal:block>
 
@@ -124,13 +128,13 @@
     
         <div tal:condition="view/person | nothing" tal:define="person view/person">
 
-            <h1 id="post" tal:content="context/title"></h1>
+            <h2 id="post" class="rep-titlename" tal:content="context/title"></h2>
 
             <p class="documentDescription" 
                  tal:content="person/summary |nothing">
             </p>
         
-            <h3>Currently Elected Representative</h3>
+            <h3 class="rep-infotitle">Currently Elected Representative</h3>
             <ul>
                 <li tal:repeat="mp view/mp_post">
                     <a tal:attributes="href mp/absolute_url">
@@ -145,24 +149,24 @@
         <p tal:content="context/birth_location | nothing"></p>
 
 
-        <h1>Biography</h1>
+        <h3 class="rep-infotitle">Biography</h3>
         <p tal:condition="context/biography" tal:content="structure context/biography/output"></p>
 
         </div>
 
         <tal:block tal:on-error="string: " tal:condition="context/mymp_plan">
 
-            <h1>MyMP Survey</h1>
+            <h3 class="rep-infotitle">MyMP Survey</h3>
                 
-            <h3>Pelan</h3>
+            <h4 class="rep-infosubtitle">Pelan</h4>
             <p tal:condition="context/mymp_plan" tal:content="structure context/mymp_plan/output">
             </p>
 
-            <h3>Peranan Wakil Rakyat</h3>
+            <h4 class="rep-infosubtitle">Peranan Wakil Rakyat</h4>
             <p tal:condition="context/mymp_role" tal:content="structure context/mymp_role/output">
             </p>
 
-            <h3>Cadangan Buku</h3>
+            <h4 class="rep-infosubtitle">Cadangan Buku</h4>
             <p tal:condition="context/mymp_book" tal:content="structure context/mymp_book/output">
             </p>
 
